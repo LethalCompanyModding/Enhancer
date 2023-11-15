@@ -2,6 +2,7 @@
 A Mod for Lethal Company to make the game more enjoyable alone or in small groups
 
 ## Configurable Settings
+*  Start with suits unlocked: Spawns the Green and Hazard suits at game start. (Still have to pay for the PJ suit)
 *  Always Show Terminal: keeps the ship terminal from closing on exit. Good for watching the output from "view monitor"
 *  Random Company Prices: by default the game uses a linear scaling price structure to have a proper risk/reward for holding on to your items after each run. If you're using this mod to extend the number of days per quota you must either set a minimum company price or use this option or the price will go negative. The random price will use in-game information when rolling such as the Company "mood" and how many days are left in the Quota. Despite the Sigurd
 log file stating it is possible for the prices to be 120%, I found no evidence that it was

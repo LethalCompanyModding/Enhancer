@@ -1,6 +1,15 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Nov-15-23#1
+*  Added or Updated in this patch
+    #### Configurable Features
+    *  bUnlockSuits, Add Green and Hazard suit to ship
+    #### Technical Changes
+    *  Company buy prices are derived from level data so they stay they same after save/load
+    *  Plugin moved to net472 to fix dependency errors
+    *  Project updated to make compiling smoother
+
 ### Update Nov-13-23#1
 *  Added or Updated in this patch
     #### Configurable Features
