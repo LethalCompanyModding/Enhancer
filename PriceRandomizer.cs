@@ -28,8 +28,8 @@ namespace Enhancer
 
             //Use the level seed to get prices
             System.Random rng = new(StartOfRound.Instance.randomMapSeed + 77);
-            float Prices = (float)rng.NextDouble() * (1.0f - MoodFactor*DaysFactor) + MoodFactor;
-            
+            float Prices = (float)rng.NextDouble() * (1.0f - MoodFactor * DaysFactor) + MoodFactor;
+
 
             Plugin.Log.LogInfo("New prices set at" + Prices.ToString());
             Plugin.Log.LogInfo("    factors " + MoodFactor.ToString() + " : " + DaysFactor.ToString() + " : " + (StartOfRound.Instance.randomMapSeed + 77).ToString());
