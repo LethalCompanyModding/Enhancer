@@ -6,12 +6,12 @@ namespace Enhancer
     public class SuitPatches
     {
         private static readonly MethodInfo unlockItem = typeof(StartOfRound).GetMethod("SpawnUnlockable", BindingFlags.NonPublic | BindingFlags.Instance);
-        
+
         public static void SpawnUnlockableDelegate(StartOfRound instance, int ID)
         {
-            unlockItem.Invoke(instance, new object[] {ID});
+            unlockItem.Invoke(instance, new object[] { ID });
         }
-        
+
         [HarmonyPatch(typeof(StartOfRound), "Start")]
         [HarmonyPostfix]
         public static void StartOfRoundSuitPatch(StartOfRound __instance)
