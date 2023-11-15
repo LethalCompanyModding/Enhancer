@@ -24,10 +24,15 @@ namespace Enhancer
             //This maximum value should only happen after more than 10 days on a single quota
             DaysFactor = Mathf.Clamp(DaysFactor, 1.0f, 2.0f);
 
-            float Prices = Random.Range(MoodFactor * DaysFactor, 1.0f);
+            //float Prices = Random.Range(MoodFactor * DaysFactor, 1.0f);
+
+            //Use the level seed to get prices
+            System.Random rng = new(StartOfRound.Instance.randomMapSeed + 77);
+            float Prices = (float)rng.NextDouble() * (1.0f - MoodFactor*DaysFactor) + MoodFactor;
+            
 
             Plugin.Log.LogInfo("New prices set at" + Prices.ToString());
-            Plugin.Log.LogInfo("    factors " + MoodFactor.ToString() + " : " + DaysFactor.ToString());
+            Plugin.Log.LogInfo("    factors " + MoodFactor.ToString() + " : " + DaysFactor.ToString() + " : " + (StartOfRound.Instance.randomMapSeed + 77).ToString());
 
             StartOfRound.Instance.companyBuyingRate = Prices;
         }
