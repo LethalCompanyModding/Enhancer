@@ -19,6 +19,10 @@ namespace Enhancer
             //Minimum sale rate fixes negative rates
             if (StartOfRound.Instance.companyBuyingRate < Plugin.Cfg.MinimumBuyRate)
                 StartOfRound.Instance.companyBuyingRate = Plugin.Cfg.MinimumBuyRate;
+
+            //Make sure clients are up to date
+            StartOfRound.Instance.SyncCompanyBuyingRateServerRpc();
+
         }
 
         [HarmonyPatch(typeof(StartOfRound), "Start")]
@@ -39,7 +43,7 @@ namespace Enhancer
         {
             Plugin.Log.LogInfo("TimeOfDay Start");
 
-            //Sets gamespeed to 18.25% slower
+            //Sets gamespeed
             __instance.globalTimeSpeedMultiplier = Plugin.Cfg.TimeScale;
         }
 
@@ -49,7 +53,7 @@ namespace Enhancer
         {
             Plugin.Log.LogInfo("HangarShipDoor Start");
 
-            //Sets hangar door close timer to 3 minutes
+            //Sets hangar door close timer
             __instance.doorPowerDuration = Plugin.Cfg.DoorTimer;
         }
 
