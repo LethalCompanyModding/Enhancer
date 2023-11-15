@@ -36,10 +36,17 @@ namespace Enhancer
                 return;
             }
 
-            Logger.LogInfo($"Enabled, patching now");
-
             Harmony patcher = new(PluginInfo.PLUGIN_GUID);
+
+            Logger.LogInfo($"Enabled, patching now");
             patcher.PatchAll(typeof(SPPatcher));
+
+            if (Cfg.DoSuitPatches)
+            {
+                Logger.LogInfo("Doing suit patches");
+                patcher.PatchAll(typeof(SuitPatches));
+            }
+
         }
     }
 
@@ -49,6 +56,7 @@ namespace Enhancer
         public readonly bool Enabled;
         public readonly bool KeepConsoleEnabled;
         public readonly bool UseRandomPrices;
+        public readonly bool DoSuitPatches;
 
         public readonly float TimeScale;
         public readonly float MinimumBuyRate;
@@ -62,6 +70,7 @@ namespace Enhancer
             Enabled = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "bEnabled", true, "Globally enable/disable the plugin").Value;
             KeepConsoleEnabled = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "bAlwaysShowTerminal", true, "Whether to keep the terminal enabled after a player stops using it").Value;
             UseRandomPrices = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "bUseRandomPrices", false, "Enables the random prices setting. Great if you're using longer quota deadlines.\nThis uses a variety of things to randomize prices such as the company mood, time passed in the quota, etc.\nRespects the minimum sale value, too.").Value;
+            DoSuitPatches = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "bUnlockSuits", false, "Unlocks a few of the cheaper suits from the start so your crew has options.").Value;
 
             TimeScale = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "fTimeScale", 1.5f, "How fast time passes on moons. Lower values mean time passes more slowly.\nRecommended value for single play: 1.15").Value;
             MinimumBuyRate = BindingPlugin.Config.Bind(PluginInfo.PLUGIN_GUID, "fMinCompanyBuyPCT", 0.0f, "The default formula for selling items to the company doesn't allow days remaining above 3.\nAlways keep this set to at least 0.0 but you probably want something higher if you have more days set for the quota.\nRecommended values for games above 3 days: 0.3 - 0.5").Value;
