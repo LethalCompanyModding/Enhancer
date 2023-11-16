@@ -7,17 +7,26 @@ namespace Enhancer
     public class SPProtectionPatches
     {
 
+        public enum ProtectionType
+        {
+            SAVE_NONE,
+            SAVE_ALL,
+            SAVE_COINFLIP
+        }
+
         [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.DespawnPropsAtEndOfRound))]
         [HarmonyPrefix]
         public static bool ProtectionPrefix(RoundManager __instance, bool despawnAllItems)
         {
+
+            if (Plugin.Cfg.ScrapProtection == ProtectionType.SAVE_NONE)
+                return true;
 
             Plugin.Log.LogInfo("ProtectionPatch -> " + despawnAllItems + " : " + StartOfRound.Instance.allPlayersDead.ToString());
 
             //check if we're needed at all
             if (despawnAllItems || StartOfRound.Instance.allPlayersDead)
             {
-
                 //There should probably be a host check here but roundmanager uses
                 //base.ishost and I dunno what to make of the right now.
 
@@ -25,9 +34,12 @@ namespace Enhancer
 
                 foreach (GrabbableObject item in allItems)
                 {
+
+                    ProtectionType prot = Plugin.Cfg.ScrapProtection;
+
                     //is this an item that would normally be destroyed after a failed round?
                     if (item.itemProperties.isScrap)
-                        if (item.isInShipRoom)
+                        if (item.isInShipRoom && ShouldSaveScrap(prot))
                         {
                             Plugin.Log.LogInfo("Saving scrap item " + item.name);
                         }
@@ -57,6 +69,19 @@ namespace Enhancer
             }
 
             return true;
+        }
+
+        public static bool ShouldSaveScrap(ProtectionType pType)
+        {
+            switch (pType)
+            {
+                case ProtectionType.SAVE_ALL:
+                    return true;
+                case ProtectionType.SAVE_COINFLIP:
+                    return new System.Random().Next() > 0.49;
+                default:
+                    return false;
+            }
         }
     }
 }
