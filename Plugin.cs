@@ -46,6 +46,9 @@ namespace Enhancer
                 Logger.LogInfo("Doing suit patches");
                 patcher.PatchAll(typeof(SuitPatches));
             }
+
+            Logger.LogInfo("Doing protection patches");
+            patcher.PatchAll(typeof(SPProtectionPatches));
         }
     }
 }
