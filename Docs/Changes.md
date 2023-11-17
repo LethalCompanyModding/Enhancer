@@ -1,6 +1,11 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Nov-17-23#1
+*  Added or Updated in this patch
+    #### Configurable Features
+    *  eScrapProtection, has a few simple options for protecting scrap when the party wipes
+
 ### Update Nov-15-23#1
 *  Added or Updated in this patch
     #### Configurable Features

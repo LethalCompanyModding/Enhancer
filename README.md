@@ -2,6 +2,7 @@
 A Mod for Lethal Company to make the game more enjoyable alone or in small groups
 
 ## Configurable Settings
+*  Protect your scrap: Can keep scrap after a party wipe, either all of it or random amounts.
 *  Start with suits unlocked: Spawns the Green and Hazard suits at game start. (Still have to pay for the PJ suit)
 *  Always Show Terminal: keeps the ship terminal from closing on exit. Good for watching the output from "view monitor"
 *  Random Company Prices: by default the game uses a linear scaling price structure to have a proper risk/reward for holding on to your items after each run. If you're using this mod to extend the number of days per quota you must either set a minimum company price or use this option or the price will go negative. The random price will use in-game information when rolling such as the Company "mood" and how many days are left in the Quota. Despite the Sigurd
@@ -19,11 +20,13 @@ possible in the base game so this mod puts a 100% cap on the scaling formula.
 See Docs/Installing.txt and follow the instructions
 
 ### Is this mod compatible with X other mod
-I dunno, I've tried getting in contact with other modders but there aren't many of us yet and I don't know what version of Bepin they're built against so I can't make any promises.
+This mod is mostly compatible with other BepinEx mods.
 
 ### Will this mod work in online lobbies
-Maybe. If it will work at all, it will require all players to run it with the same settings. I don't have anyone to test it with at the moment so I have no networking implemented to share the host's settings. A lot of what this mod touches is already sync'd via the vanilla game but not ALL of it so all players that want to use the mod should communicate beforehand and agree on what settings to use. The host's settings for most things will take priority, for example, Company price, Quota days, and probably TimeScale will all be in the host's control. The door timer is not sync'd as far as I am able to figure so all clients should use
-the same door timer setting to avoid breaking things. Do not use this mod in lobbies as a client unless you know the host is using it or it may cause errors in your game. Use the bEnabled setting in the config option to turn the mod off and restart the game before joining public lobbies. This mod is not for cheating in public lobbies so most of it won't work without the host running it.
+Features in the config files have been marked to indicate whether they require you to be host or not in a multiplayer game. For the best experience have all players use the same modlist with the same configuration. Please use the included config option "bEnabled" set to false when playing online with other users that aren't using the mod.
+
+### How do I change settings?
+This mod stores all its config settings in BepinEx/Config/mom.llama.enhancer.cfg. I've left detailed descriptions of what each option does and recommendations to try out.
 
 ## Changelog
 
