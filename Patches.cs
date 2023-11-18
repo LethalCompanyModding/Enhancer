@@ -21,6 +21,7 @@ namespace Enhancer
                 StartOfRound.Instance.companyBuyingRate = Plugin.Cfg.MinimumBuyRate;
 
             //Make sure clients are up to date
+            StartOfRound.Instance.SyncCompanyBuyingRateClientRpc(StartOfRound.Instance.companyBuyingRate);
             StartOfRound.Instance.SyncCompanyBuyingRateServerRpc();
 
         }
