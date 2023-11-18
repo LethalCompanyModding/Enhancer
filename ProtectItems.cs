@@ -78,7 +78,7 @@ namespace Enhancer
                 case ProtectionType.SAVE_ALL:
                     return true;
                 case ProtectionType.SAVE_COINFLIP:
-                    return new System.Random().Next() > 0.49;
+                    return new System.Random().NextDouble() > 0.49;
                 default:
                     return false;
             }
