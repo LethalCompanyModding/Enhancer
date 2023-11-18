@@ -1,6 +1,12 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Nov-18-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Scrap Protection mode COINFLIP bug fixed to actually flip a coin
+    *  RPC added to properly inform clients of the company price each day
+
 ### Update Nov-17-23#1
 *  Added or Updated in this patch
     #### Configurable Features
