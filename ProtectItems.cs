@@ -14,6 +14,8 @@ namespace Enhancer
             SAVE_COINFLIP
         }
 
+        private static System.Random rng;
+
         [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.DespawnPropsAtEndOfRound))]
         [HarmonyPrefix]
         public static bool ProtectionPrefix(RoundManager __instance, bool despawnAllItems)
@@ -31,6 +33,10 @@ namespace Enhancer
                 //base.ishost and I dunno what to make of the right now.
 
                 GrabbableObject[] allItems = GameObject.FindObjectsOfType<GrabbableObject>();
+                
+                //I don't know if the host/client sync despawned objects but using the
+                //same seed should make absolutely sure they do
+                rng = new System.Random(StartOfRound.Instance.randomMapSeed + 83);
 
                 foreach (GrabbableObject item in allItems)
                 {
@@ -78,7 +84,7 @@ namespace Enhancer
                 case ProtectionType.SAVE_ALL:
                     return true;
                 case ProtectionType.SAVE_COINFLIP:
-                    return new System.Random().NextDouble() > 0.49;
+                    return rng.NextDouble() > 0.49;
                 default:
                     return false;
             }
