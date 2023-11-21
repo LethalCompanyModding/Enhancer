@@ -21,16 +21,16 @@ namespace Enhancer
         public static bool ProtectionPrefix(RoundManager __instance, bool despawnAllItems)
         {
 
-            if (Plugin.Cfg.ScrapProtection == ProtectionType.SAVE_NONE)
+            if (Plugin.Cfg.ScrapProtection == ProtectionType.SAVE_NONE || despawnAllItems)
                 return true;
 
             Plugin.Log.LogInfo("ProtectionPatch -> " + despawnAllItems + " : " + StartOfRound.Instance.allPlayersDead.ToString());
 
             //check if we're needed at all
-            if (despawnAllItems || StartOfRound.Instance.allPlayersDead)
+            if (StartOfRound.Instance.allPlayersDead)
             {
                 //There should probably be a host check here but roundmanager uses
-                //base.ishost and I dunno what to make of the right now.
+                //base.ishost and I dunno what to make of this right now.
 
                 GrabbableObject[] allItems = GameObject.FindObjectsOfType<GrabbableObject>();
                 
