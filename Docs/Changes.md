@@ -1,11 +1,18 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Nov-21-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Scrap protection no long breaks things when failing a quota (Bug Smashers: Pinny/Toast)
+    *  Improved compatabiliity with Bigger Lobby 2.2.2+ (Bug Annhiliator: Bizzle)
+
 ### Update Nov-18-23#1
 *  Added or Updated in this patch
     #### Technical Changes
-    *  Scrap Protection mode COINFLIP bug fixed to actually flip a coin
+    *  Scrap Protection mode COINFLIP bug fixed to actually flip a coin (Bug Bonker: Vasanex)
     *  RPC added to properly inform clients of the company price each day
+    *  Added Dat1Mew's lovely icon to thunderstore release
 
 ### Update Nov-17-23#1
 *  Added or Updated in this patch

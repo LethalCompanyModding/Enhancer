@@ -35,3 +35,12 @@ See Changes.md for a complete list of changes from patch to patch
 ## Downloading
 
 Download from the releases section and check out the tags section for tagged versions of interest that weren't given a stand alone release
+
+## Other Credits
+
+Enhanced Icon by Discord User Dat1Mew
+
+Bug Testing Contributions by Discord Users:
+*  Pinny
+*  Vasanex
+*  Toast
