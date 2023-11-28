@@ -10,6 +10,7 @@
 
 ## Build system
 !NuGet.Config
+!LethalCompanyEnhancer.sln
 
 ## Markdowns
 !*.md
@@ -24,8 +25,9 @@
 ## GitHub specific
 !.github/
 
-# Explicit ignores
 ## Dependencies folder
 !lib
 lib/*
 !lib/.gitkeep
+
+# Explicit exceptions/ignores
