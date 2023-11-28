@@ -1,73 +1,87 @@
 using UnityEngine;
+using HarmonyLib;
 
-namespace Enhancer
+namespace Enhancer;
+
+public static class PriceRandomizer
 {
-    public static class PriceRandomizer
+    public static float GetRandomPriceScalar()
     {
-        public static void Randomize()
+        if (TimeOfDay.Instance.daysUntilDeadline < 1)
         {
-
-            Plugin.Log.LogInfo("Randomizing Prices");
-
-            if (TimeOfDay.Instance.daysUntilDeadline < 1)
-            {
-                StartOfRound.Instance.companyBuyingRate = 1.0f;
-                return;
-            }
-
-            //Company mood factor
-            float MoodFactor = GetMoodFactor();
-            Plugin.Log.LogInfo("Got mood factor");
-            //Small increase each day
-            float DaysFactor = (float)(1.0 + 0.05f * (Plugin.Cfg.DaysPerQuota - TimeOfDay.Instance.daysUntilDeadline));
-
-            //This maximum value should only happen after more than 10 days on a single quota
-            DaysFactor = Mathf.Clamp(DaysFactor, 1.0f, 2.0f);
-
-            //float Prices = Random.Range(MoodFactor * DaysFactor, 1.0f);
-
-            //Use the level seed to get prices
-            System.Random rng = new(StartOfRound.Instance.randomMapSeed + 77);
-            float Prices = (float)rng.NextDouble() * (1.0f - MoodFactor * DaysFactor) + MoodFactor;
-
-
-            Plugin.Log.LogInfo("New prices set at" + Prices.ToString());
-            Plugin.Log.LogInfo("    factors " + MoodFactor.ToString() + " : " + DaysFactor.ToString() + " : " + (StartOfRound.Instance.randomMapSeed + 77).ToString());
-
-            StartOfRound.Instance.companyBuyingRate = Prices;
+            return 1.0f;
         }
+            
+        Plugin.Log.LogInfo("Choosing random price scalar");
 
-        private static bool IsCompanyAvailable()
+        //Company mood factor
+        float moodFactor = GetMoodFactor();
+        //Small increase each day
+        float daysFactor = (float)(1.0 + 0.05f * (Plugin.Cfg.DaysPerQuota - TimeOfDay.Instance.daysUntilDeadline));
+
+        //This maximum value should only happen after more than 10 days on a single quota
+        daysFactor = Mathf.Clamp(daysFactor, 1.0f, 2.0f);
+
+        //float Prices = Random.Range(MoodFactor * DaysFactor, 1.0f);
+
+        //Use the level seed to get prices
+        System.Random rng = new(StartOfRound.Instance.randomMapSeed + 77);
+        float priceScalar = (float)rng.NextDouble() * (1.0f - moodFactor * daysFactor) + moodFactor;
+        
+        Plugin.Log.LogInfo("New price % set at" + priceScalar);
+        Plugin.Log.LogInfo("    factors " + moodFactor + " : " + daysFactor + " : " + (StartOfRound.Instance.randomMapSeed + 77));
+
+        return priceScalar;
+    }
+    
+    private static string GetCompanyMoodName()
+    {
+        if (TimeOfDay.Instance is null)
+            return null;
+
+        if (TimeOfDay.Instance.currentCompanyMood is null)
+            return null;
+
+        return TimeOfDay.Instance.currentCompanyMood.name;
+    }
+
+    private static float GetMoodFactor()
+    {
+        Plugin.Log.LogInfo("Getting mood factor");
+        
+        try
         {
-            if (TimeOfDay.Instance is null)
-                return false;
-
-            if (TimeOfDay.Instance.currentCompanyMood is null)
-                return false;
-
-            if (TimeOfDay.Instance.currentCompanyMood.name is null)
-                return false;
-
-            return true;
-        }
-
-        private static float GetMoodFactor()
-        {
-
-            Plugin.Log.LogInfo("Get mood factor");
-
-            float defaultFactor = 0.40f;
-
-            if (!IsCompanyAvailable())
-                return defaultFactor;
-
-            return TimeOfDay.Instance.currentCompanyMood.name switch
+            return GetCompanyMoodName() switch
             {
                 "SilentCalm" => 0.35f,
                 "SnoringGiant" => 0.45f,
                 "Agitated" => 0.25f,
-                _ => defaultFactor,
+                _ => 0.40f,
             };
         }
+        finally
+        {
+            Plugin.Log.LogInfo("Got mood factor");
+        }
+    }
+    
+    [HarmonyPatch(typeof(TimeOfDay), nameof(TimeOfDay.SetBuyingRateForDay))]
+    [HarmonyPostfix]
+    public static void BuyingRatePost(TimeOfDay __instance)
+    {
+        Plugin.Log.LogInfo("TimeOfDay SetBuyingRateForDay");
+
+        if (Plugin.Cfg.UseRandomPrices)
+        {
+            StartOfRound.Instance.companyBuyingRate = GetRandomPriceScalar();
+        }
+
+        //Minimum sale rate fixes negative rates
+        if (StartOfRound.Instance.companyBuyingRate < Plugin.Cfg.MinimumBuyRate)
+            StartOfRound.Instance.companyBuyingRate = Plugin.Cfg.MinimumBuyRate;
+
+        //Make sure clients are up to date
+        StartOfRound.Instance.SyncCompanyBuyingRateClientRpc(StartOfRound.Instance.companyBuyingRate);
+        StartOfRound.Instance.SyncCompanyBuyingRateServerRpc();
     }
 }

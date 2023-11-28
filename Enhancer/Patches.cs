@@ -4,28 +4,6 @@ namespace Enhancer
 {
     public class SPPatcher
     {
-
-        [HarmonyPatch(typeof(TimeOfDay), nameof(TimeOfDay.SetBuyingRateForDay))]
-        [HarmonyPostfix]
-        public static void BuyingRatePost(TimeOfDay __instance)
-        {
-            Plugin.Log.LogInfo("TimeOfDay SetBuyingRateForDay");
-
-            if (Plugin.Cfg.UseRandomPrices)
-            {
-                PriceRandomizer.Randomize();
-            }
-
-            //Minimum sale rate fixes negative rates
-            if (StartOfRound.Instance.companyBuyingRate < Plugin.Cfg.MinimumBuyRate)
-                StartOfRound.Instance.companyBuyingRate = Plugin.Cfg.MinimumBuyRate;
-
-            //Make sure clients are up to date
-            StartOfRound.Instance.SyncCompanyBuyingRateClientRpc(StartOfRound.Instance.companyBuyingRate);
-            StartOfRound.Instance.SyncCompanyBuyingRateServerRpc();
-
-        }
-
         [HarmonyPatch(typeof(StartOfRound), "Start")]
         [HarmonyPrefix]
         public static bool StartOfRoundShipStartPre()
