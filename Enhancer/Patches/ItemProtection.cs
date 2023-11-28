@@ -20,7 +20,7 @@ public static class ItemProtection
     public static bool ProtectionPrefix(RoundManager __instance, bool despawnAllItems)
     {
 
-        if (Plugin.Cfg.ScrapProtection == ProtectionType.SAVE_NONE || despawnAllItems)
+        if (Plugin.BoundConfig.ScrapProtection == ProtectionType.SAVE_NONE || despawnAllItems)
             return true;
 
         Plugin.Log.LogInfo("ProtectionPatch -> " + despawnAllItems + " : " + StartOfRound.Instance.allPlayersDead.ToString());
@@ -40,7 +40,7 @@ public static class ItemProtection
             foreach (GrabbableObject item in allItems)
             {
 
-                ProtectionType prot = Plugin.Cfg.ScrapProtection;
+                ProtectionType prot = Plugin.BoundConfig.ScrapProtection;
 
                 //is this an item that would normally be destroyed after a failed round?
                 if (item.itemProperties.isScrap)

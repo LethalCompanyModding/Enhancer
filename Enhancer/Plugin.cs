@@ -25,15 +25,15 @@ namespace Enhancer;
 public class Plugin : BaseUnityPlugin
 {
     public static ManualLogSource Log;
-    public static PluginConfig Cfg;
+    public static PluginConfig BoundConfig;
     private void Awake()
     {
         // Plugin startup logic
         Log = Logger;
 
-        Cfg = new(this);
+        BoundConfig = new(this);
 
-        if (!Cfg.Enabled)
+        if (!BoundConfig.Enabled)
         {
             Logger.LogInfo("Globally disabled, exit");
             return;
@@ -47,7 +47,7 @@ public class Plugin : BaseUnityPlugin
             new("Improved scan command", typeof(ImprovedScanCommand)),
             new("Item protection", typeof(ItemProtection)),
             new("Price randomizer", typeof(PriceRandomizer)),
-            new("Suit unlockables", typeof(SuitUnlockables), loadCondition: () => Cfg.DoSuitPatches),
+            new("Suit unlockables", typeof(SuitUnlockables), loadCondition: () => BoundConfig.DoSuitPatches),
         };
         
         Logger.LogInfo("Enabled, applying all patches");

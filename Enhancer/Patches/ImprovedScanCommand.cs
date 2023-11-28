@@ -14,7 +14,7 @@ public static class ImprovedScanCommand
         if (node.name == "ScanInfo")
         {
 
-            if (Plugin.Cfg.ThreatScannerType == 0)
+            if (Plugin.BoundConfig.ThreatScannerType == 0)
                 return;
 
             if (RoundManager.Instance.currentLevel.spawnEnemiesAndScrap)
@@ -30,7 +30,7 @@ public static class ImprovedScanCommand
                 int maxp = RoundManager.Instance.currentLevel.maxEnemyPowerCount;
                 string threatString = "\nThreat Level: ";
 
-                switch (Plugin.Cfg.ThreatScannerType)
+                switch (Plugin.BoundConfig.ThreatScannerType)
                 {
                     case 1:
                         int contacts = RoundManager.Instance.numberOfEnemiesInScene;
