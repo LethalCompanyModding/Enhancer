@@ -12,8 +12,11 @@
     use this mod in your game
 ***********************************************************/
 
+using System;
+using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Logging;
+using Enhancer.Patches;
 using HarmonyLib;
 
 namespace Enhancer
@@ -38,17 +41,21 @@ namespace Enhancer
 
             Harmony patcher = new(PluginInfo.PLUGIN_GUID);
 
-            Logger.LogInfo($"Enabled, patching now");
-            patcher.PatchAll(typeof(SPPatcher));
-
-            if (Cfg.DoSuitPatches)
+            var patches = new Dictionary<string, Type>
             {
-                Logger.LogInfo("Doing suit patches");
-                patcher.PatchAll(typeof(SuitPatches));
+                ["Configured values"] = typeof(ConfiguredValues),
+                ["Improved scan command"] = typeof(ImprovedScanCommand),
+                ["Item protection"] = typeof(ItemProtection),
+                ["Price randomizer"] = typeof(PriceRandomizer),
+                ["Suit unlockables"] = typeof(SuitUnlockables),
+            };
+            
+            Logger.LogInfo("Enabled, applying all patches");
+            foreach (var keyValuePair in patches)
+            {
+                Logger.LogInfo($"Applying {keyValuePair.Key} patches...");
+                patcher.PatchAll(keyValuePair.Value);
             }
-
-            Logger.LogInfo("Doing protection patches");
-            patcher.PatchAll(typeof(SPProtectionPatches));
         }
     }
 }
