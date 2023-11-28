@@ -19,43 +19,53 @@ using BepInEx.Logging;
 using Enhancer.Patches;
 using HarmonyLib;
 
-namespace Enhancer
+namespace Enhancer;
+
+[BepInPlugin("mom.llama.enhancer", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+public class Plugin : BaseUnityPlugin
 {
-    [BepInPlugin("mom.llama.enhancer", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BaseUnityPlugin
+    public static ManualLogSource Log;
+    public static PluginConfig Cfg;
+    private void Awake()
     {
-        public static ManualLogSource Log;
-        public static PluginConfig Cfg;
-        private void Awake()
+        // Plugin startup logic
+        Log = Logger;
+
+        Cfg = new(this);
+
+        if (!Cfg.Enabled)
         {
-            // Plugin startup logic
-            Log = Logger;
-
-            Cfg = new(this);
-
-            if (!Cfg.Enabled)
-            {
-                Logger.LogInfo("Globally disabled, exit");
-                return;
-            }
-
-            Harmony patcher = new(PluginInfo.PLUGIN_GUID);
-
-            var patches = new Dictionary<string, Type>
-            {
-                ["Configured values"] = typeof(ConfiguredValues),
-                ["Improved scan command"] = typeof(ImprovedScanCommand),
-                ["Item protection"] = typeof(ItemProtection),
-                ["Price randomizer"] = typeof(PriceRandomizer),
-                ["Suit unlockables"] = typeof(SuitUnlockables),
-            };
-            
-            Logger.LogInfo("Enabled, applying all patches");
-            foreach (var keyValuePair in patches)
-            {
-                Logger.LogInfo($"Applying {keyValuePair.Key} patches...");
-                patcher.PatchAll(keyValuePair.Value);
-            }
+            Logger.LogInfo("Globally disabled, exit");
+            return;
         }
+
+        Harmony patcher = new(PluginInfo.PLUGIN_GUID);
+
+        var patches = new PatchInfo[]
+        {
+            new("Configured values", typeof(ConfiguredValues)),
+            new("Improved scan command", typeof(ImprovedScanCommand)),
+            new("Item protection", typeof(ItemProtection)),
+            new("Price randomizer", typeof(PriceRandomizer)),
+            new("Suit unlockables", typeof(SuitUnlockables), loadCondition: () => Cfg.DoSuitPatches),
+        };
+        
+        Logger.LogInfo("Enabled, applying all patches");
+        foreach (var patch in patches)
+        {
+            if (!patch.ShouldLoad()) continue;
+            Logger.LogInfo($"Applying {patch.Name} patches...");
+            patcher.PatchAll(patch.PatchType);
+        }
+    }
+
+    private class PatchInfo {
+        public PatchInfo(string name, Type patchType, Func<bool>? loadCondition = null) => 
+            (Name, PatchType, LoadCondition) = (name, patchType, loadCondition);
+        
+        public string Name { get; }
+        public Type PatchType { get; }
+        private Func<bool> LoadCondition;
+        public bool ShouldLoad() => LoadCondition == null || LoadCondition();
     }
 }
