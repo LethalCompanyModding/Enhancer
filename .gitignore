@@ -25,3 +25,7 @@
 !.github/
 
 # Explicit ignores
+## Dependencies folder
+!lib
+lib/*
+!lib/.gitkeep
