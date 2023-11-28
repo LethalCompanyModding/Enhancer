@@ -1,7 +1,7 @@
 using UnityEngine;
 using HarmonyLib;
 
-namespace Enhancer;
+namespace Enhancer.Patches;
 
 public static class PriceRandomizer
 {

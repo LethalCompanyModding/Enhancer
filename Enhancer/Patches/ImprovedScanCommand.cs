@@ -2,7 +2,7 @@ using HarmonyLib;
 
 namespace Enhancer.Patches;
 
-public class ImprovedScanCommand
+public static class ImprovedScanCommand
 {
     //Todo: This should probably be changed to a postfix on the text modifier
     //function so I can add custom tags to terminal nodes
