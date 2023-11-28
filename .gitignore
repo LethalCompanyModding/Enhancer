@@ -33,7 +33,7 @@ lib/*
 ## Projects
 ### Enhancer
 !Enhancer/
-Enhancer[Bb]in/
-Enhancer/[Oo]bj
+Enhancer/[Bb]in/
+Enhancer/[Oo]bj/
 
 # Explicit exceptions/ignores
