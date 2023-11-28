@@ -2,7 +2,7 @@ using HarmonyLib;
 
 namespace Enhancer
 {
-    public class SPPatcher
+    public class ConfiguredValues
     {
         [HarmonyPatch(typeof(StartOfRound), "Start")]
         [HarmonyPrefix]
