@@ -30,4 +30,10 @@
 lib/*
 !lib/.gitkeep
 
+## Projects
+### Enhancer
+!Enhancer/
+Enhancer[Bb]in/
+Enhancer/[Oo]bj
+
 # Explicit exceptions/ignores
