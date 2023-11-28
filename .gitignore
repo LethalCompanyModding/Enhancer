@@ -1,3 +1,27 @@
-bin/**
-obj/**
-.vscode/**
+# Exclude everything
+/*
+
+# Specific includes
+## Docs
+!Docs/
+
+## Source
+!src/
+
+## Build system
+!NuGet.Config
+
+## Markdowns
+!*.md
+!LICENSE
+
+## important Git files
+!.gitmodules
+!.gitignore
+!.gitattributes
+!.git-blame-ignore-revs
+
+## GitHub specific
+!.github/
+
+# Explicit ignores
