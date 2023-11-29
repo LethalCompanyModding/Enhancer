@@ -1,4 +1,4 @@
-# Mod Manager (recommended)
+# Installation using Mod Manager (recommended)
 
 This mod's releases are available on [Thunderstore](https://thunderstore.io/). It can be installed with ease using any mod manager 
 that supports Thunderstore as a mod repository.
