@@ -11,7 +11,8 @@
 ## Source
 !src/
 
-## Build scripts
+## Build System/Scripts
+!build.props
 !build.sh
 !build.ps1
 !build.cmd
