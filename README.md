@@ -36,7 +36,13 @@ See Changes.md for a complete list of changes from patch to patch
 
 Download from the releases section and check out the tags section for tagged versions of interest that weren't given a stand alone release
 
-## Other Credits
+## Acknowledgements
+
+### References
+
+* CI/CD configuration from [BepInEx](https://github.com/BepInEx/BepInEx/tree/master)
+
+### Contributions
 
 Enhanced Icon by Discord User Dat1Mew
 
