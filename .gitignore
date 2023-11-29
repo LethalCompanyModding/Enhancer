@@ -8,9 +8,10 @@
 ## Source
 !src/
 
-## Build system
-!NuGet.Config
-!Lethal-Company-Enhancer.sln
+## Build scripts
+!build.sh
+!build.ps1
+!build.cmd
 
 ## Markdowns
 !*.md
@@ -31,9 +32,16 @@ lib/*
 !lib/.gitkeep
 
 ## Projects
+!Lethal-Company-Enhancer.sln
+
 ### Enhancer
 !Enhancer/
 Enhancer/[Bb]in/
 Enhancer/[Oo]bj/
+
+### Build
+!build/
+build/[Bb]in/
+build/[Oo]bj/
 
 # Explicit exceptions/ignores
