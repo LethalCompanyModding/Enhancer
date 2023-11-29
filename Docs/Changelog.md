@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI/CD build setup
 - Automatic publish to Thunderstore via GitHub actions
 
+### Fixed
+
+### Removed
+
 ## [0.0.5] - 2023-11-21
 
 ### Fixed
