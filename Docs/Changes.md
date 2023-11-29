@@ -1,6 +1,13 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Nov 23-29#1
+*  Forked from https://github.com/Crunchepillar/Lethal-Company-Enhancer/
+*  Updated:
+   #### Technical Changes
+   *  Project restructured/refactored
+   *  Features should be unchanged 
+
 ### Update Nov-21-23#1
 *  Added or Updated in this patch
     #### Technical Changes
