@@ -52,9 +52,9 @@ The release page for BepInEx can be found [on GitHub](https://github.com/BepInEx
 
 ## Installing the Mod
 
-1. Create a new folder called `lordfirespeed-enhancer` inside `/BepInEx/plugins`.
+1. Create a new folder called `augmented-enhancer` inside `/BepInEx/plugins`.
 2. Place the mod DLL into this folder.
-   The filepath should end with `/BepInEx/plugins/lordfirespeed-enhancer/Enhancer.dll`.
+   The filepath should end with `/BepInEx/plugins/augmented-enhancer/Enhancer.dll`.
 3. Run the game again. The mod will create a default configuration file at `/BepInEx/config/lordfirespeed.enhancer.cfg`.
 4. Wait to reach the main menu, then close the game. 
 5. 5.Edit the values in the configuration file as you please, using the text editor of your choice.
