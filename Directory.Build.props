@@ -1,0 +1,11 @@
+<Project>
+    <PropertyGroup>
+        <VersionPrefix>1.0.0</VersionPrefix>
+        <Authors>Crunchepillar, Lordfirespeed</Authors>
+        <LangVersion>latest</LangVersion>
+        <PackageLicenseExpression>CC-BY-NC-4.0</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/Lordfirespeed/Lethal-Company-Augmented-Enhancer</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Lordfirespeed/Lethal-Company-Augmented-Enhancer</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+</Project>
