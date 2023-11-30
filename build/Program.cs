@@ -153,17 +153,8 @@ public sealed class PatchThunderstoreMetadataTask : FrostingTask<BuildContext>
 [IsDependentOn(typeof(PatchThunderstoreMetadataTask))]
 public sealed class BuildThunderstoreTask : FrostingTask<BuildContext>
 {
-    public void RenameBuildArchive(BuildContext ctx)
-    {
-        if (ctx.BuildType == BuildContext.ProjectBuildType.Release) return;
-
-        var oldBuildArchiveName = ctx.DistributionDirectory
-            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename());
-        var newBuildArchiveName = ctx.DistributionDirectory
-            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion));
-
-        ctx.MoveFile(oldBuildArchiveName, newBuildArchiveName);
-    }
+    public override bool ShouldRun(BuildContext ctx) => !(ctx.FileExists(ctx.DistributionDirectory.CombineWithFilePath(
+        ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion)))
 
     public override void Run(BuildContext ctx)
     {
@@ -179,6 +170,18 @@ public sealed class BuildThunderstoreTask : FrostingTask<BuildContext>
         );
 
         RenameBuildArchive(ctx);
+    }
+    
+    public void RenameBuildArchive(BuildContext ctx)
+    {
+        if (ctx.BuildType == BuildContext.ProjectBuildType.Release) return;
+
+        var oldBuildArchiveName = ctx.DistributionDirectory
+            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename());
+        var newBuildArchiveName = ctx.DistributionDirectory
+            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion));
+
+        ctx.MoveFile(oldBuildArchiveName, newBuildArchiveName);
     }
 }
 
