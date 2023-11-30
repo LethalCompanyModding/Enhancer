@@ -27,4 +27,4 @@ target = ""
 
 [publish]
 communities = ["lethal-company"]
-categories = []
+categories = [ "bepinex", "misc", "tools", "clientside", "serverside" ]
