@@ -1,0 +1,102 @@
+name: Release
+
+on:
+  release:
+    types: [prereleased, released]
+    
+jobs:
+  
+  # Prepare environment and build packages
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.prepare_artifact_metadata.outputs.VERSION }}
+    steps:
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      # Set up .NET environment for the next steps
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      # Build packages
+      - name: Build
+        run: |
+          ./build.sh --target BuildThunderstore --build-type Release
+          
+      # Output metadata 
+      - name: Prepare artifact metadata
+        id: prepare_artifact_metadata
+        run: |
+          echo A
+          echo VERSION=${{ github.event.release.tag_name }} >> $GITHUB_OUTPUT
+      
+      # Tar packages 
+      - name: Tar files
+        run: tar -I zstd -cf build.tar.zst dist/*.zip
+
+      # Store the archive of packages as an artifact
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: build.tar.zst
+          if-no-files-found: error
+  
+  upload-release-artifacts:
+    name: Upload Release Artifacts
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # Retrieve the archive of packages
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+      
+      # Un-tar packages
+      - name: Unpack build artifact
+        run: tar axf build.tar.zst
+        
+      # Upload packages as release assets
+      - name: Upload Release Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.event.release.tag_name }} dist/*.zip
+  
+  deploy-thunderstore:
+    name: Deploy to Thunderstore
+    needs: build
+    env:
+      TCLI_AUTH_TOKEN: ${{ secrets.THUNDERSTORE_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      # Retrieve the archive of packages
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+
+      # Un-tar packages
+      - name: Unpack build artifact
+        run: tar axf build.tar.zst
+      
+      # Double-check at least one package was unpacked
+      - name: Validate packages exist
+        run: test -d dist
+      
+      - name: Setup Thunderstore CLI
+        run: |
+          wget -O tcli.tar.gz https://github.com/thunderstore-io/thunderstore-cli/releases/download/0.2.1/tcli-0.2.1-linux-x64.tar.gz
+          tar xvf tcli.tar.gz
+          sudo mv -v tcli-0.1.4-linux-x64/tcli /bin
+      
+      # Upload to Thunderstore
+      - name: Publish Thunderstore package
+        run: |
+          ./build.sh --target PublishThunderstore --build-type Release

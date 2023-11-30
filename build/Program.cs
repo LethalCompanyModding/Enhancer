@@ -153,8 +153,8 @@ public sealed class PatchThunderstoreMetadataTask : FrostingTask<BuildContext>
 [IsDependentOn(typeof(PatchThunderstoreMetadataTask))]
 public sealed class BuildThunderstoreTask : FrostingTask<BuildContext>
 {
-    public override bool ShouldRun(BuildContext ctx) => !(ctx.FileExists(ctx.DistributionDirectory.CombineWithFilePath(
-        ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion)))
+    public override bool ShouldRun(BuildContext ctx) => !ctx.FileExists(ctx.DistributionDirectory.CombineWithFilePath(
+        ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion)));
 
     public override void Run(BuildContext ctx)
     {
