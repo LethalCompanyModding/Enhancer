@@ -16,14 +16,13 @@ containsNsfwContent = false
 BepInEx-BepInExPack = "5.4.2100"
 
 [build]
-icon = "assets/icons/icon.png"
-readme = "README.md"
-outdir = "build"
+icon = "icons/icon.png"
+readme = "../README.md"
+outdir = "../dist"
 
 [[build.copy]]
-source = "./dist"
-target = ""
-
+source = "../Enhancer/bin/Enhancer.dll"
+target = "Enhancer.dll"
 
 [publish]
 communities = ["lethal-company"]
