@@ -12,6 +12,7 @@
 !src/
 
 ## Build System/Scripts
+!NuGet.Config
 !build.props
 !build.sh
 !build.ps1
