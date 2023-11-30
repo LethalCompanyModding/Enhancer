@@ -6,7 +6,7 @@ using Tomlyn.Model;
 
 namespace Build;
 
-public class TomlDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ITomlMetadataProvider
+public class TomlDictionary<TKey, TValue>: Dictionary<TKey, TValue>, ITomlMetadataProvider where TKey: notnull
 {
     // storage for comments and whitespace
     TomlPropertiesMetadata? ITomlMetadataProvider.PropertiesMetadata { get; set; }
