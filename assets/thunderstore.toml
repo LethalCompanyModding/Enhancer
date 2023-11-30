@@ -26,4 +26,4 @@ target = "Enhancer.dll"
 
 [publish]
 communities = ["lethal-company"]
-categories = [ "bepinex", "misc", "tools", "clientside", "serverside" ]
+categories = ["bepinex", "misc", "tools", "clientside", "serverside"]
