@@ -13,7 +13,7 @@
 
 ## Build System/Scripts
 !NuGet.Config
-!build.props
+!Directory.Build.props
 !build.sh
 !build.ps1
 !build.cmd
