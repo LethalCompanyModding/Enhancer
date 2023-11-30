@@ -1,0 +1,30 @@
+[config]
+schemaVersion = "0.0.1"
+
+[general]
+repository = "https://thunderstore.io"
+
+[package]
+namespace = "Lordfirespeed"
+name = "Augmented_Enhancer"
+versionNumber = "1.0.0"
+description = "A mod for Lethal Company that adds additional configuration options to fit the player's preferences."
+websiteUrl = "https://github.com/Lordfirespeed/Lethal-Company-Augmented-Enhancer"
+containsNsfwContent = false
+
+[package.dependencies]
+BepInEx-BepInExPack = "5.4.2100"
+
+[build]
+icon = "assets/icons/icon.png"
+readme = "README.md"
+outdir = "build"
+
+[[build.copy]]
+source = "./dist"
+target = ""
+
+
+[publish]
+communities = ["lethal-company"]
+categories = []
