@@ -9,7 +9,6 @@ using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Frosting;
 using Cake.Git;
-using HandlebarsDotNet;
 using Microsoft.Build.Definition;
 using Microsoft.Build.Evaluation;
 
@@ -100,90 +99,6 @@ public sealed class CompileTask : FrostingTask<BuildContext>
         ctx.DotNetBuild(ctx.RootDirectory.FullPath, buildSettings);
     }
 }
-
-[TaskName("PreMake")]
-[IsDependentOn(typeof(CompileTask))]
-public sealed class PreMakeTask : FrostingTask<BuildContext>
-{
-    public override void Run(BuildContext ctx)
-    {
-        ctx.CreateDirectory(ctx.DistributionDirectory);
-        ctx.CleanDirectory(ctx.DistributionDirectory);
-    }
-}
-
-public abstract class MakeTask : FrostingTask<BuildContext>
-{
-    public abstract string DistributionName { get; }
-    
-    public override void Run(BuildContext ctx)
-    {
-        ctx.Log.Information($"Preparing {DistributionName} distribution");
-        var targetDirectory = ctx.DistributionDirectory.Combine(DistributionName);
-        ctx.CreateDirectory(targetDirectory);
-        ctx.CleanDirectory(targetDirectory);
-
-        PreparePackage(ctx, targetDirectory);
-        
-        CollectFiles(ctx, targetDirectory);
-        CompressPackage(ctx, targetDirectory);
-    }
-
-    public virtual void PreparePackage(BuildContext ctx, DirectoryPath targetDirectory) { }
-    
-    public void CollectFiles(BuildContext ctx, DirectoryPath copyToPath)
-    {
-        var filesToCopy = CoreFilesToCollect(ctx).Concat(FilesToCollect(ctx));
-        ctx.CopyFiles(filesToCopy , copyToPath);
-    }
-    
-    public IEnumerable<FilePath> CoreFilesToCollect(BuildContext ctx)
-    {
-        yield return ctx.RootDirectory.CombineWithFilePath("README.md");
-        yield return ctx.RootDirectory.Combine("assets").Combine("icons").CombineWithFilePath("icon.png");
-        yield return ctx.RootDirectory.Combine("Enhancer").Combine("bin").CombineWithFilePath("Enhancer.dll");
-    }
-
-    public virtual IEnumerable<FilePath> FilesToCollect(BuildContext ctx) { yield break; }
-
-    public void CompressPackage(BuildContext ctx, DirectoryPath packagePath)
-    {
-        var targetZipName = ctx.TargetZipName(DistributionName); 
-        ctx.Log.Information($"Packing {targetZipName}");
-        ctx.Zip(packagePath, ctx.DistributionDirectory.CombineWithFilePath(targetZipName));
-    }
-}
-
-[TaskName("MakeThunderstore")]
-[IsDependentOn(typeof(PreMakeTask))]
-public sealed class MakeThunderstoreTask : MakeTask
-{
-    public override string DistributionName => "thunderstore";
-
-    public override void PreparePackage(BuildContext ctx, DirectoryPath targetDirectory)
-    {
-        WriteManifest(ctx, targetDirectory.CombineWithFilePath("manifest.json"));
-    }
-
-    public void WriteManifest(BuildContext ctx, FilePath writeToPath)
-    {
-        HandlebarsTemplate<TextWriter, object, object> manifestTemplate;
-        
-        using (StreamReader templateFileReader = File.OpenText(ctx.RootDirectory.Combine("assets").CombineWithFilePath("manifest.json.handlebars").FullPath))
-        {
-            manifestTemplate = Handlebars.Compile(templateFileReader);
-        }
-        
-        using (StreamWriter manifestFileWriter = File.CreateText(writeToPath.FullPath))
-        {
-            manifestTemplate(manifestFileWriter, new { context = ctx });
-        }
-    }
-}
-
-[TaskName("Publish")]
-[IsDependentOn(typeof(MakeThunderstoreTask))]
-public class PublishTask : FrostingTask { }
 
 [TaskName("Default")]
 [IsDependentOn(typeof(CompileTask))]
