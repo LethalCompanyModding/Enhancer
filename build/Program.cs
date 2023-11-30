@@ -38,6 +38,14 @@ public class BuildContext : FrostingContext
         BuildType = ctx.Argument("build-type", ProjectBuildType.Development);
         GitHubReleaseTagName = ctx.Argument<string>("github-tag-name", "");
     }
+    
+    public static void WriteToGithubOutput(string key, string value)
+    {
+        var gitHubOutputPath = System.Environment.GetEnvironmentVariable("GITHUB_OUTPUT");
+        if (gitHubOutputPath is null) return;
+        using StreamWriter fileStream = File.AppendText(gitHubOutputPath);
+        fileStream.Write($"{key}={value}\n");
+    }
 
     public enum ProjectBuildType
     {
@@ -174,14 +182,17 @@ public sealed class BuildThunderstoreTask : FrostingTask<BuildContext>
     
     public void RenameBuildArchive(BuildContext ctx)
     {
-        if (ctx.BuildType == BuildContext.ProjectBuildType.Release) return;
+        var oldBuildArchiveName = ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename();
+        var oldBuildArchivePath = ctx.DistributionDirectory
+            .CombineWithFilePath(oldBuildArchiveName);
 
-        var oldBuildArchiveName = ctx.DistributionDirectory
-            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename());
-        var newBuildArchiveName = ctx.DistributionDirectory
-            .CombineWithFilePath(ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion));
+        var newBuildArchiveName = ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion);
+        var newBuildArchivePath = ctx.DistributionDirectory
+            .CombineWithFilePath(newBuildArchiveName);
 
-        ctx.MoveFile(oldBuildArchiveName, newBuildArchiveName);
+        ctx.MoveFile(oldBuildArchivePath, newBuildArchivePath);
+        BuildContext.WriteToGithubOutput("THUNDERSTORE_PACKAGE_PATH", ctx.RootDirectory.GetRelativePath(newBuildArchivePath).FullPath);
+        BuildContext.WriteToGithubOutput("THUNDERSTORE_PACKAGE_NAME", newBuildArchiveName);
     }
 }
 
