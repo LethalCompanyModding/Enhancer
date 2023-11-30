@@ -191,11 +191,16 @@ public sealed class PublishTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext ctx)
     {
+        var newBuildArchiveName = ctx.SolutionThunderstoreProperties.GetBuildArchiveFilename(ctx.BuildPackageVersion);
+        var newBuildArchivePath = ctx.DistributionDirectory
+            .CombineWithFilePath(newBuildArchiveName);
+        
         ctx.Command(
             new []{ "tcli", "tcli.exe" },
             new ProcessArgumentBuilder()
                 .Append("publish")
-                .AppendSwitch("--config-path", ctx.ThunderstoreConfigFile.FullPath),
+                .AppendSwitch("--config-path", ctx.ThunderstoreConfigFile.FullPath)
+                .AppendSwitch("--file", newBuildArchivePath.FullPath),
             expectedExitCode: 0
         );
     }
