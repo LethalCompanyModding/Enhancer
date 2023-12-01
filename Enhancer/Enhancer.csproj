@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <AssemblyName>Enhancer</AssemblyName>
+    <AssemblyName>Augmented Enhancer</AssemblyName>
+    <ProjectGuid>com.github.lordfirespeed.augmented_enhancer</ProjectGuid>
     <Description>Tweaks plugin for Lethal Company</Description>
-    <Version>0.1.4</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
