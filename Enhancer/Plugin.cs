@@ -20,7 +20,7 @@ using HarmonyLib;
 
 namespace Enhancer;
 
-[BepInPlugin("lordfirespeed.enhancer", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+[BepInPlugin("com.github.lordfirespeed.augmented_enhancer", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 public class Plugin : BaseUnityPlugin
 {
     public static ManualLogSource Log;
