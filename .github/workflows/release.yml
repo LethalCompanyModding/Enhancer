@@ -56,7 +56,7 @@ jobs:
           
       # Push and create pull request
       - name: Create Pull Request
-        if: ${{ steps.retrieve_git_status.outputs.GIT_STATUS != "" }}
+        if: ${{ steps.retrieve_git_status.outputs.GIT_STATUS != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
