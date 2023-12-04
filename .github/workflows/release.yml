@@ -10,9 +10,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    outputs:
-      THUNDERSTORE_PACKAGE_PATH: ${{ steps.build.outputs.THUNDERSTORE_PACKAGE_PATH }}
-      THUNDERSTORE_PACKAGE_NAME: ${{ steps.build.outputs.THUNDERSTORE_PACKAGE_NAME }}
     steps:
       # Check out current repository
       - name: Fetch Sources
@@ -33,13 +30,13 @@ jobs:
       - name: Patch Changelog
         run: echo
 
-      # Build package and publish to Thunderstore TODO: change this to target PublishThunderstore
+      # Build package and publish to Thunderstore
       - name: Build & Publish
         id: build
         env:
           TCLI_AUTH_TOKEN: ${{ secrets.THUNDERSTORE_API_TOKEN }}
         run: |
-          ./build.sh --target BuildThunderstore --build-type Release --github-tag-name ${{ github.event.release.tag_name }}
+          ./build.sh --target PublishThunderstore --build-type Release --github-tag-name ${{ github.event.release.tag_name }}
 
       # Upload built packages as release assets
       - name: Upload Release Assets
