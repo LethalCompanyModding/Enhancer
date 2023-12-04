@@ -5,10 +5,8 @@ on:
     types: [prereleased, released]
     
 jobs:
-  
-  # Prepare environment and build packages
-  build:
-    name: Build
+  publish:
+    name: Publish package
     runs-on: ubuntu-latest
     steps:
       # Check out current repository
