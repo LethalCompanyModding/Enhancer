@@ -10,6 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+### Added
+
+### Fixed
+
+### Removed
+
+## [0.1.0] - 2023-12-04
+
+### Changed
+
 - Forked from https://github.com/Crunchepillar/Lethal-Company-Enhancer/
 - Project restructured
 - Project renamed
@@ -19,10 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - CI/CD build setup
 - Automatic publish to Thunderstore via GitHub actions
-
-### Fixed
-
-### Removed
 
 ## [0.0.5] - 2023-11-21
 
