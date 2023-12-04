@@ -26,6 +26,7 @@
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
     <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" />
+    <PackageReference Include="LethalAPI.GameLibs" Version="40.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,17 +34,5 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>../lib/Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity Netcode">
-      <HintPath>../lib/Unity.Netcode.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TMP">
-      <HintPath>../lib/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
