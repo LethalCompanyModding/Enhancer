@@ -62,7 +62,7 @@ namespace Enhancer
         [HarmonyPostfix]
         public static void TerminalUpdatePost(Terminal __instance)
         {
-            if (__instance.terminalUIScreen.gameObject.activeSelf && Plugin.Cfg.KeepConsoleEnabled)
+            if (__instance.terminalUIScreen.gameObject.activeSelf || !Plugin.Cfg.KeepConsoleEnabled)
                 return;
 
             __instance.terminalUIScreen.gameObject.SetActive(true);

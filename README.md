@@ -44,3 +44,4 @@ Bug Testing Contributions by Discord Users:
 *  Pinny
 *  Vasanex
 *  Toast
+*  Sariol

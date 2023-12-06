@@ -1,6 +1,12 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Dec-6-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Fixed a bug with the terminal remaining rendered even when the config was false in some cases.
+    *  Improved compatability with GameMaster
+
 ### Update Nov-21-23#1
 *  Added or Updated in this patch
     #### Technical Changes
