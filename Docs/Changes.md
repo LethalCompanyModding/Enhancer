@@ -1,6 +1,12 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Dec-10-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Cleaned up some code
+    *  Verified compatability with v45
+
 ### Update Dec-6-23#1
 *  Added or Updated in this patch
     #### Technical Changes
