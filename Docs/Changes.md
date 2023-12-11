@@ -1,6 +1,11 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Dec-11-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Patched scrap protection to only run on hosts. This should fix any errors when clients tried to despawn network objects without permission. Oopsie. (Bug Assassin: Zoey ♥)
+
 ### Update Dec-10-23#1
 *  Added or Updated in this patch
     #### Technical Changes

@@ -4,7 +4,7 @@
     <TargetFramework>net472</TargetFramework>
     <AssemblyName>Enhancer</AssemblyName>
     <Description>Tweaks plugin for Lethal Company</Description>
-    <Version>0.1.7</Version>
+    <Version>0.1.8</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
