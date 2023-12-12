@@ -24,7 +24,7 @@ namespace Enhancer
             //Early exit if we're not even supposed to run
             if (Plugin.Cfg.ScrapProtection == ProtectionType.SAVE_NONE || despawnAllItems)
                 return true;
-            
+
             //Fixes non hosts getting errors when trying to destroy items
             if (__instance.IsHost || __instance.IsServer)
             {
@@ -37,7 +37,7 @@ namespace Enhancer
                     //base.ishost and I dunno what to make of this right now.
 
                     GrabbableObject[] allItems = GameObject.FindObjectsOfType<GrabbableObject>();
-                    
+
                     //I don't know if the host/client sync despawned objects but using the
                     //same seed should make absolutely sure they do
                     rng = new System.Random(StartOfRound.Instance.randomMapSeed + 83);
