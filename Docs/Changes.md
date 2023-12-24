@@ -1,6 +1,11 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Dec-23-23#1
+*  Added or Updated in this patch
+    #### Technical Changes
+    *  Patched scrap protection to properly remove equipment. (Bug Tamer: Karma)
+
 ### Update Dec-11-23#1
 *  Added or Updated in this patch
     #### Technical Changes

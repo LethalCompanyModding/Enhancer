@@ -36,6 +36,9 @@ See Changes.md for a complete list of changes from patch to patch
 
 Download from the releases section and check out the tags section for tagged versions of interest that weren't given a stand alone release
 
+## How to contact me
+Join discord.gg/lcmod (the LC Modding discord) search for Enhancer in the mod-releases section or @MamaLlama :]
+
 ## Other Credits
 
 Enhanced Icon by Discord User Dat1Mew
@@ -46,3 +49,4 @@ Bug Testing Contributions by Discord Users:
 *  Toast
 *  Sariol
 *  Zoey ♥
+*  Karma

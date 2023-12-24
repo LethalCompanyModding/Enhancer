@@ -42,19 +42,10 @@ namespace Enhancer
                     //same seed should make absolutely sure they do
                     rng = new System.Random(StartOfRound.Instance.randomMapSeed + 83);
 
-                    foreach (GrabbableObject item in allItems)
+                    void DeleteItem(GrabbableObject item)
                     {
+                        Plugin.Log.LogInfo("Despawning item: "+ item.name);
 
-                        ProtectionType prot = Plugin.Cfg.ScrapProtection;
-
-                        //is this an item that would normally be destroyed after a failed round?
-                        if (item.itemProperties.isScrap)
-                            if (item.isInShipRoom && ShouldSaveScrap(prot))
-                            {
-                                Plugin.Log.LogInfo("Saving scrap item " + item.name);
-                            }
-                            else
-                            {
                                 //despawn network item
                                 item.gameObject.GetComponent<NetworkObject>().Despawn();
 
@@ -63,7 +54,30 @@ namespace Enhancer
                                 {
                                     __instance.spawnedSyncedObjects.Remove(item.gameObject);
                                 }
+                    }
+
+                    foreach (GrabbableObject item in allItems)
+                    {
+
+                        ProtectionType prot = Plugin.Cfg.ScrapProtection;
+
+                        //is this an item that would normally be destroyed after a failed round?
+                        if (item.itemProperties.isScrap)
+                        {
+                            if (item.isInShipRoom && ShouldSaveScrap(prot))
+                            {
+                                Plugin.Log.LogInfo("Saving scrap item " + item.name);
                             }
+                            else
+                            {
+                                DeleteItem(item);   
+                            }
+                        }
+                        else
+                        {
+                            DeleteItem(item);
+                        }
+                            
                     }
 
                     //destroy temp effects since we're skipping the destroy function
