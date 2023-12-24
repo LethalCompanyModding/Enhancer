@@ -44,16 +44,16 @@ namespace Enhancer
 
                     void DeleteItem(GrabbableObject item)
                     {
-                        Plugin.Log.LogInfo("Despawning item: "+ item.name);
+                        Plugin.Log.LogInfo("Despawning item: " + item.name);
 
-                                //despawn network item
-                                item.gameObject.GetComponent<NetworkObject>().Despawn();
+                        //despawn network item
+                        item.gameObject.GetComponent<NetworkObject>().Despawn();
 
-                                //destroy synced object
-                                if (__instance.spawnedSyncedObjects.Contains(item.gameObject))
-                                {
-                                    __instance.spawnedSyncedObjects.Remove(item.gameObject);
-                                }
+                        //destroy synced object
+                        if (__instance.spawnedSyncedObjects.Contains(item.gameObject))
+                        {
+                            __instance.spawnedSyncedObjects.Remove(item.gameObject);
+                        }
                     }
 
                     foreach (GrabbableObject item in allItems)
@@ -70,14 +70,14 @@ namespace Enhancer
                             }
                             else
                             {
-                                DeleteItem(item);   
+                                DeleteItem(item);
                             }
                         }
                         else
                         {
                             DeleteItem(item);
                         }
-                            
+
                     }
 
                     //destroy temp effects since we're skipping the destroy function
