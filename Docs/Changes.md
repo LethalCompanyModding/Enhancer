@@ -1,6 +1,11 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Hotfix Dec-24-23#1
+*  Added or Updated in this patch
+    #### Fixes
+    *  Scrap protection now leaves any item in the ship alone, including equipment, oopsie. (Bug Rancher: JadedRoxie)
+
 ### Update Dec-23-23#1
 *  Added or Updated in this patch
     #### Technical Changes

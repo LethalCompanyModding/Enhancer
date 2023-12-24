@@ -44,7 +44,7 @@ namespace Enhancer
 
                     void DeleteItem(GrabbableObject item)
                     {
-                        Plugin.Log.LogInfo("Despawning item: " + item.name);
+                        Plugin.Log.LogInfo("Despawning item: " + item.name + " in ship: " + item.isInShipRoom);
 
                         //despawn network item
                         item.gameObject.GetComponent<NetworkObject>().Despawn();
@@ -61,17 +61,19 @@ namespace Enhancer
 
                         ProtectionType prot = Plugin.Cfg.ScrapProtection;
 
-                        //is this an item that would normally be destroyed after a failed round?
-                        if (item.itemProperties.isScrap)
+                        //Save anything inside the ship
+                        if (item.isInShipRoom)
                         {
-                            if (item.isInShipRoom && ShouldSaveScrap(prot))
+                            //If its anything but scrap or it is scrap but we should save it
+                            if (!item.itemProperties.isScrap || ShouldSaveScrap(prot))
                             {
-                                Plugin.Log.LogInfo("Saving scrap item " + item.name);
+                                Plugin.Log.LogInfo("Preserving ship item: " + item.name);
                             }
                             else
                             {
                                 DeleteItem(item);
                             }
+                            
                         }
                         else
                         {

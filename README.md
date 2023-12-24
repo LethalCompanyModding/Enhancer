@@ -50,3 +50,4 @@ Bug Testing Contributions by Discord Users:
 *  Sariol
 *  Zoey ♥
 *  Karma
+*  JadedRoxie
