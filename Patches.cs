@@ -90,7 +90,7 @@ namespace Enhancer
 
                         Recommendation: Do not modify this function ever, it is a headache
                     */
-                    int power = RoundManager.Instance.currentEnemyPower;
+                    float power = RoundManager.Instance.currentEnemyPower;
                     int maxp = RoundManager.Instance.currentLevel.maxEnemyPowerCount;
                     string threatString = "\nThreat Level: ";
 

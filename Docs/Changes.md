@@ -1,6 +1,11 @@
 # Single Player Enhancer Changelog
 ### Note: not all updates get releases
 
+### Update Apr-14-24#1
+*  Added or Updated in this patch
+    #### Fixes
+    *  Updated enemyPower to float to match zeekerss breaking method change 
+
 ### Hotfix Dec-24-23#1
 *  Added or Updated in this patch
     #### Fixes
