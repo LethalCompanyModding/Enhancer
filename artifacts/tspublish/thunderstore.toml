@@ -11,6 +11,10 @@
     #on image and text content on your listing or your package may be removed
     containsNsfwContent=false
 
+    #This is the link that shows up in the top right of the package page
+    #while it can be anything, I suggest keeping it as your github
+    websiteUrl="https://github.com/LethalCompanyModding/Enhancer"
+
     #This is where you put in dependencies in the format
     #DependencyNamespace-ModName = "version.number.here"
     [package.dependencies]
@@ -22,15 +26,7 @@
 [build]
     icon  ="./icon.png"
     outdir="./build"
-    readme="../../README.md"
-
-    [[build.copy]]
-        source="../../LICENSE"
-        target="./"
-
-    [[build.copy]]
-        source="../../CHANGELOG.md"
-        target="./"
+    readme="./dist/README.md"
 
     [[build.copy]]
         source="./dist"
