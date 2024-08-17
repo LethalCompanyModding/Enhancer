@@ -9,7 +9,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>mom.llama.enhancer</AssemblyName>
     <Description>A tweaks mod to enhance small group or solo play</Description>
-    <Product>Enhancer</Product>
+    <Product>Lethal_Company_Enhancer</Product>
     <Authors>Mom_Llama</Authors>
     <!--
       Except this, you should keep this up to date with your publishing tags
