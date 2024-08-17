@@ -39,6 +39,10 @@
     the reference instead.
   -->
 
+  <PropertyGroup>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference
       Include="BepInEx.Analyzers"
