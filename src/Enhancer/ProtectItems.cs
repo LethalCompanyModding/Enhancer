@@ -36,7 +36,7 @@ namespace Enhancer
                     //There should probably be a host check here but roundmanager uses
                     //base.ishost and I dunno what to make of this right now.
 
-                    GrabbableObject[] allItems = GameObject.FindObjectsOfType<GrabbableObject>();
+                    GrabbableObject[] allItems = GameObject.FindObjectsByType<GrabbableObject>(FindObjectsSortMode.None);
 
                     //I don't know if the host/client sync despawned objects but using the
                     //same seed should make absolutely sure they do
@@ -73,7 +73,7 @@ namespace Enhancer
                             {
                                 DeleteItem(item);
                             }
-                            
+
                         }
                         else
                         {

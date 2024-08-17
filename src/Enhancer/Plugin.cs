@@ -7,9 +7,6 @@
 
     See Docs/License for information about copying
     distributing this project
-
-    See Docs/Installing for information on how to
-    use this mod in your game
 ***********************************************************/
 
 using BepInEx;
@@ -18,7 +15,7 @@ using HarmonyLib;
 
 namespace Enhancer
 {
-    [BepInPlugin("mom.llama.enhancer", PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInPlugin(LCMPluginInfo.PLUGIN_GUID, LCMPluginInfo.PLUGIN_NAME, LCMPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
         public static ManualLogSource Log;
@@ -36,16 +33,21 @@ namespace Enhancer
                 return;
             }
 
-            Harmony patcher = new(PluginInfo.PLUGIN_GUID);
+            Harmony patcher = new(LCMPluginInfo.PLUGIN_GUID);
 
             Logger.LogInfo($"Enabled, patching now");
             patcher.PatchAll(typeof(SPPatcher));
+
+            /*
+            Been meaning to do this for a while, completely ignore
+            the old and broken suit patches.
 
             if (Cfg.DoSuitPatches)
             {
                 Logger.LogInfo("Doing suit patches");
                 patcher.PatchAll(typeof(SuitPatches));
             }
+            */
 
             Logger.LogInfo("Doing protection patches");
             patcher.PatchAll(typeof(SPProtectionPatches));

@@ -1,0 +1,83 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- 
+      These were automatically generated for you by the Enhancer.
+      You should probably not edit them by hand if you've already published
+      to the Thunderstore
+    -->
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>mom.llama.enhancer</AssemblyName>
+    <Description>A tweaks mod to enhance small group or solo play</Description>
+    <Product>Enhancer</Product>
+    <Authors>Mom_Llama</Authors>
+    <!--
+      Except this, you should keep this up to date with your publishing tags
+    -->
+    <Version>0.1.13</Version>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>$(Product)</RootNamespace>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/LethalCompanyModding/Enhancer</RepositoryUrl>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <PublishProfile>Thunderstore</PublishProfile>
+    <TargetName>$(Product)</TargetName>
+    <ProjectDepsFileName>$(Product).deps.json</ProjectDepsFileName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <Import Project="$(SolutionDir)\build\InfoProps.targets" />
+
+  <!--
+    Don't mess with anything below this line, it is required to build via 
+    github actions. If you are referencing other DLLs in your project than the
+    base game or unity DLLs they will need to be available via NUGET or copied
+    directly into your repo (which is pretty bad form) to build properly unless
+    they already exist on github in which case you can use submodules to track
+    the reference instead.
+  -->
+
+  <ItemGroup>
+    <PackageReference
+      Include="BepInEx.Analyzers"
+      PrivateAssets="all"
+      Version="1.*"
+    />
+    <PackageReference
+      Include="BepInEx.Core"
+      Version="5.4.*"
+    />
+    <PackageReference
+      Include="LethalCompany.GameLibs.Steam"
+      Version="56.0.1-ngd.0"
+    />
+    <PackageReference
+      Include="UnityEngine.Modules"
+      IncludeAssets="compile"
+      Version="2023.2.4"
+    />
+
+    <!--
+      When adding additional references, ensure you use <Private>false</Private> to
+      ensure the DLL is explicitly NOT copied to the output directory. This is because
+      the DLLs are already included in the game and will be loaded from there.
+
+      Further, if the DLL is not included as part of the game, you should be using a
+      Dependency in your thunderstore.toml file to ensure the DLL is available to the
+      game when your mod is loaded.
+
+      Example: <Reference Include="Assembly-CSharp.dll" Private="false" />
+    -->
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference
+      Include="Microsoft.NETFramework.ReferenceAssemblies"
+      PrivateAssets="all"
+      Version="1.0.2"
+    />
+  </ItemGroup>
+
+</Project>
