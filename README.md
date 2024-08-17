@@ -2,6 +2,14 @@
 
 A Mod for Lethal Company to make the game more enjoyable alone or in small groups
 
+## Maintainers
+
+**Original Author**: Robyn
+
+**Current Maintainer(s)**: Robyn
+
+This mod has been dedicated to the [Lethal Company Modding community repo](https://github.com/LethalCompanyModding/Enhancer) and may be maintained by any willing community member with a github account.
+
 ## Configurable Settings
 
 * Protect your scrap: Can keep scrap after a party wipe, either all of it or random amounts.

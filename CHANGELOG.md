@@ -1,5 +1,10 @@
 # Single Player Enhancer Changelog
 
+## Update Aug-17-24#2
+
+* Actually compiled for v60
+* Re-added link to github repo
+
 ## Update Aug-17-24#1
 
 * Compiled for v60
