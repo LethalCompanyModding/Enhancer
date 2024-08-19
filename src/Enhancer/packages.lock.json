@@ -28,6 +28,17 @@
           "UnityEngine.Modules": "2022.3.9"
         }
       },
+      "Sigurd.BepInEx.CSync": {
+        "type": "Direct",
+        "requested": "[5.0.1, )",
+        "resolved": "5.0.1",
+        "contentHash": "nZy9B3Mk7jX2GZROXimR/Qx0i6fhgzBIbnRfMx5I3SBhHSNegH0FQf6CKdHhfjNxpQnV0RoT0+ke7em4bgNw9w==",
+        "dependencies": {
+          "BepInEx.Core": "5.4.21",
+          "LethalCompany.GameLibs.Steam": "49.0.0-alpha.1",
+          "UnityEngine.Modules": "2022.3.9"
+        }
+      },
       "UnityEngine.Modules": {
         "type": "Direct",
         "requested": "[2023.2.4, )",
