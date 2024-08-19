@@ -28,7 +28,7 @@ possible in the base game so this mod puts a 100% cap on the scaling formula.
 
 ### How do I install the mod?
 
-See Docs/Installing.txt and follow the instructions
+Use a mod manager like R2ModManager or GaleMM
 
 ### Is this mod compatible with X other mod
 
@@ -36,7 +36,7 @@ This mod is mostly compatible with other BepinEx mods.
 
 ### Will this mod work in online lobbies
 
-Features in the config files have been marked to indicate whether they require you to be host or not in a multiplayer game. For the best experience have all players use the same modlist with the same configuration. Please use the included config option "bEnabled" set to false when playing online with other users that aren't using the mod.
+Since version 1.0.0, Enhancer will use CSync to ensure all clients have the same config values. Enhancer will no longer support any client-only configurations, all clients must have it installed to connect to each other as CSync uses a network prefab.
 
 ### How do I change settings?
 
@@ -44,11 +44,11 @@ This mod stores all its config settings in BepinEx/Config/mom.llama.enhancer.cfg
 
 ## Changelog
 
-See Changes.md for a complete list of changes from patch to patch
+See CHANGELOG.md for a complete list of changes from patch to patch
 
 ## Downloading
 
-Download from the releases section and check out the tags section for tagged versions of interest that weren't given a stand alone release
+See the link by the repo description to download this mod from the Thunderstore.
 
 ## How to contact me
 
