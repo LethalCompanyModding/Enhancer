@@ -34,7 +34,8 @@ If applicable, add screenshots to help explain your problem.
   - [ ] v56
   - [ ] v61
 - Plugin Version:
-  - [ ] Version 0.1.14
+  - [ ] Version 1.0.0
+  - [ ] Other
 
 **Fill this out if you checked `other` above**
 - Other OS Information: N/A
