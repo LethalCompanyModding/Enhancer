@@ -1,5 +1,10 @@
 # Single Player Enhancer Changelog
 
+## v1.0.0
+
+* All changelogs will now use version numbers
+* Implement CSync config syncing for all clients
+
 ## Update Aug-17-24#2
 
 * Actually compiled for v60
