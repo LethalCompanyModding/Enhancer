@@ -1,56 +1,53 @@
 ﻿/**********************************************************
     Single Player Enhancements Mod for Lethal Company
 
-    Authors:
-        Mama Llama
-        Flowerful
+    Author:
+        Robyn
 
-    See Docs/License for information about copying
-    distributing this project
+    Maintainers:
+        N/A
+
+    See LICENSE file for information about copying
+    or distributing this project
 ***********************************************************/
 
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using Lethal_Company_Enhancer.Config;
+using Lethal_Company_Enhancer.Patches;
 
-namespace Enhancer
+[BepInPlugin(LCMPluginInfo.PLUGIN_GUID, LCMPluginInfo.PLUGIN_NAME, LCMPluginInfo.PLUGIN_VERSION)]
+public class Plugin : BaseUnityPlugin
 {
-    [BepInPlugin(LCMPluginInfo.PLUGIN_GUID, LCMPluginInfo.PLUGIN_NAME, LCMPluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BaseUnityPlugin
+    /****
+
+    Don't know how else to fix the warnings on these two fields
+    so I made them "intentionally left null" for now
+
+    ****/
+    public static ManualLogSource Log = null!;
+    public static PluginConfig Cfg = null!;
+    private void Awake()
     {
-        public static ManualLogSource Log;
-        public static PluginConfig Cfg;
-        private void Awake()
+        // Plugin startup logic
+        Log = Logger;
+
+        Cfg = new(this);
+
+        if (!Cfg.Enabled)
         {
-            // Plugin startup logic
-            Log = Logger;
-
-            Cfg = new(this);
-
-            if (!Cfg.Enabled)
-            {
-                Logger.LogInfo("Globally disabled, exit");
-                return;
-            }
-
-            Harmony patcher = new(LCMPluginInfo.PLUGIN_GUID);
-
-            Logger.LogInfo($"Enabled, patching now");
-            patcher.PatchAll(typeof(SPPatcher));
-
-            /*
-            Been meaning to do this for a while, completely ignore
-            the old and broken suit patches.
-
-            if (Cfg.DoSuitPatches)
-            {
-                Logger.LogInfo("Doing suit patches");
-                patcher.PatchAll(typeof(SuitPatches));
-            }
-            */
-
-            Logger.LogInfo("Doing protection patches");
-            patcher.PatchAll(typeof(SPProtectionPatches));
+            Logger.LogInfo("Globally disabled, exit");
+            return;
         }
+
+        Harmony patcher = new(LCMPluginInfo.PLUGIN_GUID);
+
+        Logger.LogInfo($"Enabled, patching now");
+        patcher.PatchAll(typeof(HangarShipDoorPatches));
+        patcher.PatchAll(typeof(RoundManagerPatches));
+        patcher.PatchAll(typeof(StartOfRoundPatches));
+        patcher.PatchAll(typeof(TerminalPatches));
+        patcher.PatchAll(typeof(TimeOfDayPatches));
     }
 }
