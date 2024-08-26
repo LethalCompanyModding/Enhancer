@@ -67,3 +67,4 @@ Bug Testing Contributions by Discord Users:
 * Zoey ♥
 * Karma
 * JadedRoxie
+* BlooFox
