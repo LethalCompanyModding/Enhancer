@@ -1,5 +1,9 @@
 # Single Player Enhancer Changelog
 
+## v1.0.2
+
+- Properly generate new config when empty (Reporter: HiJacked)
+
 ## v1.0.1
 
 - Stop accidentally including CSync twice
