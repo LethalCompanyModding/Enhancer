@@ -37,6 +37,7 @@ public class Plugin : BaseUnityPlugin
 
         Config.SaveOnConfigSet = false;
         Cfg = new(base.Config);
+        Config.Save();
 
         Harmony patcher = new(LCMPluginInfo.PLUGIN_GUID);
 
