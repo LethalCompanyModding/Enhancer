@@ -1,5 +1,9 @@
 # Single Player Enhancer Changelog
 
+## v1.0.3
+
+- Updated for newest game libs
+
 ## v1.0.2
 
 - Properly generate new config when empty (Reporter: HiJacked)
