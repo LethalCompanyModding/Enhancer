@@ -23,7 +23,7 @@
       Except this, you should keep this up to date with your publishing tags
     -->
 
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <!--
@@ -38,7 +38,7 @@
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" PrivateAssets="all" Version="1.*" />
     <PackageReference Include="BepInEx.Core" Version="5.4.*" />
-    <PackageReference Include="LethalCompany.GameLibs.Steam" Version="67.0.0-ngd.0" />
+    <PackageReference Include="LethalCompany.GameLibs.Steam" Version="70.0.0-ngd.0" />
     <PackageReference Include="Sigurd.BepInEx.CSync" Version="5.0.1" PrivateAssets="all" />
     <PackageReference Include="UnityEngine.Modules" IncludeAssets="compile" Version="2023.2.4" />
 

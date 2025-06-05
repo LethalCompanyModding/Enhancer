@@ -1,5 +1,10 @@
 # Single Player Enhancer Changelog
 
+## v1.0.4
+
+- Updated for newest game libs
+- Silvy :3
+
 ## v1.0.3
 
 - Updated for newest game libs
