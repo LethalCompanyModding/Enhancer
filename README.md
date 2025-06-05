@@ -52,7 +52,7 @@ See the link by the repo description to download this mod from the Thunderstore.
 
 ## How to contact me
 
-Join discord.gg/lcmod (the LC Modding discord) search for Enhancer in the mod-releases section or @MamaLlama :]
+Join <https://discord.gg/XeyYqRdRGC> (the LC Modding discord) search for Enhancer in the mod-releases section or @MamaLlama :]
 
 ## Other Credits
 
